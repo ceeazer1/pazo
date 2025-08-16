@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pazzo MMX - Red Bank's premiere Italian Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #c41e3a;
+            --primary-dark: #a01729;
+            --primary-light: #d63851;
+            --accent-color: #A97C50;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --background-light: #f8f8f8;
+            --white: #ffffff;
+            --black: #1a1a1a;
+            --dark-gray: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            line-height: 1.2;
+            text-wrap: balance;
+            text-wrap: pretty;
+        }
+
+        p {
+            text-wrap: balance;
+            text-wrap: pretty;
+        }
+
+        /* Header Navigation - EXACT La Mondina Style */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section - EXACT La Mondina Layout */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./images/homepage.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-logo {
+            height: 120px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: var(--primary-light);
+        }
+
+        .hero .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            font-size: 14px;
+            width: 185px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .btn-service {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--primary-color);
+            border-width: 2px;
+        }
+
+        .btn-service:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Section Styles - EXACT La Mondina */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-dark {
+            background: linear-gradient(rgba(42, 42, 42, 0.8), rgba(42, 42, 42, 0.8)), url('./images/dinner.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+        }
+
+        .section-light {
+            background: var(--background-light);
+        }
+
+        .section-black {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        /* Welcome Section - EXACT La Mondina Grid */
+        .welcome-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .welcome-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .welcome-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .welcome-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Services Section - EXACT La Mondina Style */
+        .services-section {
+            padding: 80px 0;
+            background: var(--background-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .section-title .subtitle {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background-size: cover;
+            background-position: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            color: var(--white);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 0;
+        }
+
+        .service-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card:hover::before {
+            background: rgba(196, 30, 58, 0.7);
+        }
+
+        .service-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .service-card p {
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .service-card .btn {
+            margin-top: auto;
+        }
+
+        /* Footer - EXACT La Mondina Style */
+        .footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-bottom: 2rem;
+        }
+
+        .footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .welcome-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - EXACT La Mondina Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="/">
+                <img src="https://images.squarespace-cdn.com/content/v1/6127bdce985c3d7fa8244021/c3c1300a-5a8b-4065-acde-945586508937/Pazzo+Red+Black+Logo+%281%29.png" alt="Pazzo MMX Logo" class="logo">
+            </a>
+
+            <nav class="nav-menu">
+                <a href="/">HOME</a>
+                <a href="/menus">MENUS</a>
+                <a href="/order-catering">BANQUETS & CATERING</a>
+                <a href="/reach-out">RESERVATIONS</a>
+                <a href="https://www.toasttab.com/pazzo-mmx-141-w-front-st/v3" target="_blank">ORDER ONLINE</a>
+                <a href="/gift-cards">GIFT CARDS</a>
+                <a href="/join-our-team">CAREERS</a>
+                <a href="/reach-out">CONTACT</a>
+            </nav>
+
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section - EXACT La Mondina Layout -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="https://images.squarespace-cdn.com/content/v1/6127bdce985c3d7fa8244021/c3c1300a-5a8b-4065-acde-945586508937/Pazzo+Red+Black+Logo+%281%29.png" alt="Pazzo MMX" class="hero-logo">
+            <p class="tagline">Italian dining</p>
+            <div class="hero-buttons">
+                <a href="/reach-out" class="btn btn-primary">RESERVATIONS</a>
+                <a href="/menus" class="btn btn-outline">VIEW MENU</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Section - EXACT La Mondina Grid -->
+    <section class="section section-black">
+        <div class="welcome-grid">
+            <div class="welcome-content">
+                <h3>INSPIRED BY HERITAGE</h3>
+                <p>Pazzo means crazy, and we're crazy about food! Thoughtfully prepared Italian dishes featuring risotto & pasta, paired with a carefully curated list of wines & craft cocktails. We source the finest ingredients & work with local purveyors whenever possible.</p>
+                <div class="welcome-buttons">
+                    <a href="/menus" class="btn btn-primary">OUR MENUS</a>
+                    <a href="https://www.toasttab.com/pazzo-mmx-141-w-front-st/v3" target="_blank" class="btn btn-outline">ONLINE ORDERING</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Section - EXACT La Mondina Style -->
+    <section class="services-section">
+        <div class="section-title">
+            <h2>FESTA A LA PAZZO!</h2>
+            <p class="subtitle">Banquets & Catering</p>
+            <p>A destination for private events & banquets in Monmouth County & Ocean County. Bring the style of Pazzo MMX's rustic Italian experience to your next special occasion.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" style="background-image: url('./images/table image.webp');">
+                <h4>EVENT SPACES</h4>
+                <p>Perfect venues for your special celebrations and corporate events.</p>
+                <a href="/order-catering" class="btn btn-service">LEARN MORE</a>
+            </div>
+
+            <div class="service-card" style="background-image: url('./images/dish.webp');">
+                <h4>BANQUET PACKAGES</h4>
+                <p>Customized packages for weddings, parties, and special occasions.</p>
+                <a href="/order-catering" class="btn btn-service">VIEW PACKAGES</a>
+            </div>
+
+            <div class="service-card" style="background-image: url('./images/pizza.webp');">
+                <h4>CATERING TRAYS</h4>
+                <p>Delicious catering options for your home or office gatherings.</p>
+                <a href="/order-catering" class="btn btn-service">ORDER CATERING</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section - Showcase Pazzo Images -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>EXPERIENCE PAZZO MMX</h2>
+                <p class="subtitle">A taste of authentic Italy in Red Bank</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="./images/pizza.webp" alt="Authentic Italian Pizza" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px;">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="./images/salad.webp" alt="Fresh Italian Salad" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px;">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="./images/dish.webp" alt="Signature Pazzo Dish" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px;">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="./images/table image.webp" alt="Elegant Dining Experience" style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - EXACT La Mondina Style -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>LOCATION</h4>
+                <p>141 W. Front Street<br>Red Bank, New Jersey<br>732-747-4551</p>
+            </div>
+
+            <div>
+                <h4>HOURS</h4>
+                <p><strong>Wednesday & Thursday:</strong> 4:30pm – 10:00pm<br>
+                <strong>Friday & Saturday:</strong> 4:30pm – 11:00pm<br>
+                <strong>Sunday:</strong> 4:30pm – 9:00pm</p>
+            </div>
+
+            <div>
+                <h4>CONTACT US</h4>
+                <p>732-747-4551<br>
+                General Inquiries Only:<br>
+                <a href="mailto:info@pazzoredbank.com">info@pazzoredbank.com</a><br>
+                Please Direct All Catering and Banquet Requests to:<br>
+                <a href="mailto:events@pazzoredbank.com">events@pazzoredbank.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="https://www.facebook.com/PazzoRedBank" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/pazzo_mmx/" target="_blank">Instagram</a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Pazzo MMX © <span id="year"></span> by Pazzo Red Bank</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

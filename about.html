@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Pazzo MMX - Red Bank's premiere Italian Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #c41e3a;
+            --primary-dark: #a01729;
+            --primary-light: #d63851;
+            --accent-color: #A97C50;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --background-light: #f8f8f8;
+            --white: #ffffff;
+            --black: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            line-height: 1.2;
+            text-wrap: balance;
+            text-wrap: pretty;
+        }
+
+        p {
+            text-wrap: balance;
+            text-wrap: pretty;
+        }
+
+        /* Header Navigation - EXACT La Mondina Style */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 90px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--primary-light);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 80px 0;
+            background: var(--background-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .content p {
+            margin-bottom: 2rem;
+        }
+
+        .content strong {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+            margin-bottom: 2rem;
+        }
+
+        .footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            margin: 1rem 0 0.5rem;
+        }
+
+        .footer a {
+            color: var(--white);
+            text-decoration: none;
+            margin-right: 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .page-header {
+                height: 40vh;
+            }
+
+            .content {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/">
+                <img src="https://images.squarespace-cdn.com/content/v1/6127bdce985c3d7fa8244021/c3c1300a-5a8b-4065-acde-945586508937/Pazzo+Red+Black+Logo+%281%29.png" alt="Pazzo MMX Logo" class="logo">
+            </a>
+            <nav class="nav">
+                <a href="/">HOME</a>
+                <a href="/menus">MENUS</a>
+                <a href="/order-catering">BANQUETS & CATERING</a>
+                <a href="/reach-out">RESERVATIONS</a>
+                <a href="https://www.toasttab.com/pazzo-mmx-141-w-front-st/v3" target="_blank">ORDER ONLINE</a>
+                <a href="/gift-cards">GIFT CARDS</a>
+                <a href="/join-our-team">CAREERS</a>
+                <a href="/reach-out">CONTACT</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div>
+            <h1>ABOUT PAZZO MMX</h1>
+            <p class="subtitle">- our story -</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content">
+                <p><strong>Pazzo means crazy, and we're crazy about food!</strong></p>
+
+                <p>Located in the heart of Red Bank, New Jersey, Pazzo MMX is Red Bank's premiere Italian restaurant, bringing authentic Italian flavors and warm hospitality to our community since our opening.</p>
+
+                <p>Our passion for Italian cuisine drives everything we do. From our handmade pasta to our carefully selected wines, every dish is prepared with the finest ingredients and traditional techniques passed down through generations.</p>
+
+                <p>At Pazzo MMX, we believe that great food brings people together. Whether you're joining us for a romantic dinner, family celebration, or business lunch, our team is dedicated to providing an exceptional dining experience that will keep you coming back.</p>
+
+                <p>Visit us at 141 W. Front Street in Red Bank and discover why we're crazy about food – and why our guests are crazy about us!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>LOCATION</h4>
+                <p>141 W. Front Street<br>Red Bank, New Jersey<br>732-747-4551</p>
+            </div>
+
+            <div>
+                <h4>HOURS</h4>
+                <p><strong>Wednesday & Thursday:</strong> 4:30pm – 10:00pm<br>
+                <strong>Friday & Saturday:</strong> 4:30pm – 11:00pm<br>
+                <strong>Sunday:</strong> 4:30pm – 9:00pm</p>
+            </div>
+
+            <div>
+                <h4>CONTACT US</h4>
+                <p>732-747-4551<br>
+                General Inquiries Only:<br>
+                <a href="mailto:info@pazzoredbank.com">info@pazzoredbank.com</a><br>
+                Please Direct All Catering and Banquet Requests to:<br>
+                <a href="mailto:events@pazzoredbank.com">events@pazzoredbank.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="https://www.facebook.com/PazzoRedBank" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/pazzo_mmx/" target="_blank">Instagram</a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Pazzo MMX © <span id="year"></span> by Pazzo Red Bank</p>
+        </div>
+    </footer>
+
+    <script>
+        // Update year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

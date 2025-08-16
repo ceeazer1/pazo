@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pazzo MMX - Red Bank's premiere Italian Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo img {
+            height: 83px;
+            width: auto;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #c41e3a;
+        }
+
+        .nav .cta-button {
+            background: #c41e3a;
+            color: white !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .nav .cta-button:hover {
+            background: #a01729;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 100px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero .btn {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero .btn:hover {
+            background: #a01729;
+            transform: translateY(-2px);
+        }
+
+        /* Grid Layout Section */
+        .grid-section {
+            position: relative;
+            min-height: 100vh;
+            padding: 4rem 0;
+            background: #f8f8f8;
+        }
+
+        .grid-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 3vw;
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            grid-template-rows: repeat(21, minmax(calc(100vw * 0.0215), auto));
+            gap: 11px;
+            position: relative;
+        }
+
+        /* Email Signup Form */
+        .email-signup {
+            grid-area: 7/8/14/20;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .email-signup h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #c41e3a;
+        }
+
+        .email-signup p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .email-form input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .email-form button {
+            background: #c41e3a;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Grid Images */
+        .grid-image {
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .grid-image:hover {
+            transform: scale(1.02);
+        }
+
+        .grid-image-1 {
+            grid-area: 1/1/11/6;
+        }
+
+        .grid-image-2 {
+            grid-area: 15/7/22/15;
+        }
+
+        .grid-image-3 {
+            grid-area: 5/22/15/27;
+        }
+
+        /* Action Cards Section */
+        .action-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .action-section h2 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .action-cards {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .action-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #c41e3a;
+        }
+
+        .action-card p {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .action-card .btn {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .action-card .btn:hover {
+            background: #a01729;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer h4 {
+            font-family: 'Playfair Display', serif;
+            color: #c41e3a;
+            margin-bottom: 1rem;
+        }
+
+        .footer h5 {
+            color: #c41e3a;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        .footer a:hover {
+            color: #c41e3a;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(8, 1fr);
+                grid-template-rows: repeat(29, minmax(24px, auto));
+            }
+
+            .email-signup {
+                grid-area: 8/2/19/10;
+            }
+
+            .grid-image-1 {
+                grid-area: 1/2/9/7;
+            }
+
+            .grid-image-2 {
+                grid-area: 21/2/29/7;
+            }
+
+            .grid-image-3 {
+                grid-area: 19/6/26/10;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://images.squarespace-cdn.com/content/v1/6127bdce985c3d7fa8244021/c3c1300a-5a8b-4065-acde-945586508937/Pazzo+Red+Black+Logo+%281%29.png" alt="Pazzo MMX Logo">
+            </div>
+            <nav class="nav">
+                <a href="/">Welcome</a>
+                <a href="/menus">Menus</a>
+                <a href="/order-catering">Order Catering</a>
+                <a href="/promotions">Promotions</a>
+                <a href="/about">About</a>
+                <a href="/join-our-team">Join Our Team</a>
+                <a href="/gift-cards">Gift Cards</a>
+                <a href="/reach-out">Reach Out</a>
+                <a href="https://www.toasttab.com/pazzo-mmx-141-w-front-st/v3" target="_blank" class="cta-button">Take Out Order</a>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Pazzo means crazy, and we're crazy about food!</h1>
+                <a href="#menu" class="btn">View Menu</a>
+            </div>
+        </section>
+
+        <!-- Grid Layout Section -->
+        <section class="grid-section">
+            <div class="grid-container">
+                <!-- Email Signup Form -->
+                <div class="email-signup">
+                    <h3>Join our Emailing List!</h3>
+                    <p>Sign up with your email address to receive new delicious specials and weekly deals and promotions!</p>
+                    <form class="email-form">
+                        <input type="email" placeholder="Email Address" required>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+
+                <!-- Grid Images -->
+                <div class="grid-image grid-image-1" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+                <div class="grid-image grid-image-2" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+                <div class="grid-image grid-image-3" style="background-image: url('https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+            </div>
+        </section>
+
+        <!-- Action Cards Section -->
+        <section class="action-section">
+            <h2>Place an online order, reserve a table, or view our menu below!</h2>
+            <div class="action-cards">
+                <div class="action-card">
+                    <div style="padding: 2rem;">
+                        <h4>Online Ordering</h4>
+                        <p>Click here for to place an online order with us.</p>
+                        <button class="btn" onclick="handleOnlineOrder()">Place an Order</button>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div style="padding: 2rem;">
+                        <h4>Reserve a table</h4>
+                        <p>Click here to reserve a table with us!</p>
+                        <button class="btn" onclick="handleReservation()">Make A Reservation</button>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div style="padding: 2rem;">
+                        <h4>View Our Menu</h4>
+                        <p>Click here to view all of our menus including dinner, lunch, full wine list, and more!</p>
+                        <button class="btn" onclick="handleViewMenu()">View Menus</button>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div style="padding: 2rem;">
+                        <h4>Purchase Gift Cards Here!</h4>
+                        <p>Maximum of (2) gift cards per table reservation/seating. Click here to purchase Pazzo MMX gift cards!</p>
+                        <button class="btn" onclick="handleGiftCard()">Purchase Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>Pazzo Red Bank</h4>
+                <p>141 W. Front Street,<br>Red Bank, New Jersey<br>732-747-4551</p>
+            </div>
+
+            <div>
+                <h4>Hours</h4>
+                <h5>— Lunch Hours —</h5>
+                <p>Mon - Sat 11:30 AM - 3:00 PM</p>
+                <h5>— Dinner Hours —</h5>
+                <p>Mon - Thurs 3:00 PM - 9:00 PM<br>
+                   Fri - Sat 3:00 PM - 10:00 PM<br>
+                   Sunday - 12:00 - 9:00 PM</p>
+            </div>
+
+            <div>
+                <h4>Follow</h4>
+                <a href="https://www.facebook.com/PazzoRedBank" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/pazzo_mmx/" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('.nav');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Email form submission with backend integration
+        document.querySelector('.email-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+
+            try {
+                const response = await fetch('/api/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    this.reset();
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Thank you for signing up! (Demo mode)');
+                this.reset();
+            }
+        });
+
+        // Online ordering function
+        async function handleOnlineOrder() {
+            try {
+                const response = await fetch('/api/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+                alert(result.message);
+
+                if (result.redirect) {
+                    // In a real app, you'd redirect to the ordering system
+                    console.log('Would redirect to:', result.redirect);
+                }
+            } catch (error) {
+                alert('Opening online ordering system... (Demo mode)');
+            }
+        }
+
+        // Reservation function
+        async function handleReservation() {
+            const name = prompt('Enter your name:');
+            const phone = prompt('Enter your phone number:');
+            const date = prompt('Enter preferred date (MM/DD/YYYY):');
+            const time = prompt('Enter preferred time:');
+            const guests = prompt('Number of guests:');
+
+            if (name && phone && date && time && guests) {
+                try {
+                    const response = await fetch('/api/reservation', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name, phone, date, time, guests })
+                    });
+
+                    const result = await response.json();
+                    alert(result.message);
+                } catch (error) {
+                    alert('Reservation request submitted! We will call you to confirm. (Demo mode)');
+                }
+            }
+        }
+
+        // View menu function
+        async function handleViewMenu() {
+            try {
+                const response = await fetch('/api/menu');
+                const result = await response.json();
+                alert(result.message);
+            } catch (error) {
+                alert('Opening menu... (Demo mode)');
+            }
+        }
+
+        // Gift card function
+        async function handleGiftCard() {
+            const amount = prompt('Enter gift card amount ($):');
+            const recipientEmail = prompt('Enter recipient email:');
+            const senderName = prompt('Enter your name:');
+
+            if (amount && recipientEmail && senderName) {
+                try {
+                    const response = await fetch('/api/giftcard', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ amount, recipientEmail, senderName })
+                    });
+
+                    const result = await response.json();
+                    alert(result.message);
+                } catch (error) {
+                    alert('Processing gift card purchase... (Demo mode)');
+                }
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add loading states to buttons
+        function addLoadingState(button) {
+            const originalText = button.textContent;
+            button.textContent = 'Loading...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 2000);
+        }
+
+        // Add click handlers to all buttons for loading states
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.type !== 'submit') {
+                    addLoadingState(this);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

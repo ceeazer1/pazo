@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Cards — Pazzo MMX - Red Bank's premiere Italian Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #c41e3a;
+            --primary-dark: #a01729;
+            --primary-light: #d63851;
+            --accent-color: #A97C50;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --background-light: #f8f8f8;
+            --white: #ffffff;
+            --black: #1a1a1a;
+            --dark-gray: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            line-height: 1.2;
+            text-wrap: balance;
+            text-wrap: pretty;
+        }
+
+        p {
+            text-wrap: balance;
+            text-wrap: pretty;
+        }
+
+        /* Header Navigation - EXACT La Mondina Style */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .page-header {
+                height: 30vh;
+                margin-top: 80px;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .gift-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .gift-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./images/giftcards');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 90px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--primary-light);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 80px 0;
+            background: var(--background-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .content p {
+            margin-bottom: 2rem;
+        }
+
+        .gift-card-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .gift-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gift-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .gift-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            font-size: 14px;
+            width: 185px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+            margin-bottom: 2rem;
+        }
+
+        .footer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .page-header {
+                height: 40vh;
+            }
+
+            .content {
+                font-size: 1.1rem;
+            }
+
+            .gift-card-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <a href="/">
+                <img src="https://images.squarespace-cdn.com/content/v1/6127bdce985c3d7fa8244021/c3c1300a-5a8b-4065-acde-945586508937/Pazzo+Red+Black+Logo+%281%29.png" alt="Pazzo MMX Logo" class="logo">
+            </a>
+            <nav class="nav-menu">
+                <a href="/">HOME</a>
+                <a href="/menus">MENUS</a>
+                <a href="/order-catering">BANQUETS & CATERING</a>
+                <a href="/reach-out">RESERVATIONS</a>
+                <a href="https://www.toasttab.com/pazzo-mmx-141-w-front-st/v3" target="_blank">ORDER ONLINE</a>
+                <a href="/gift-cards">GIFT CARDS</a>
+                <a href="/join-our-team">CAREERS</a>
+                <a href="/reach-out">CONTACT</a>
+            </nav>
+
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div>
+            <h1>GIFT CARDS</h1>
+            <p class="subtitle">- the perfect gift -</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content">
+            <p>Give the gift of exceptional Italian dining! Pazzo MMX gift cards are perfect for any occasion and never expire.</p>
+            
+            <p><strong>Maximum of (2) gift cards per table reservation/seating.</strong></p>
+            
+            <div class="gift-card-options">
+                <div class="gift-card">
+                    <h3>$25 Gift Card</h3>
+                    <p>Perfect for appetizers or lunch</p>
+                    <a href="tel:732-747-4551" class="btn btn-primary">Purchase $25</a>
+                </div>
+
+                <div class="gift-card">
+                    <h3>$50 Gift Card</h3>
+                    <p>Great for dinner for two</p>
+                    <a href="tel:732-747-4551" class="btn btn-primary">Purchase $50</a>
+                </div>
+
+                <div class="gift-card">
+                    <h3>$100 Gift Card</h3>
+                    <p>Perfect for special celebrations</p>
+                    <a href="tel:732-747-4551" class="btn btn-primary">Purchase $100</a>
+                </div>
+
+                <div class="gift-card">
+                    <h3>Custom Amount</h3>
+                    <p>Choose your own amount</p>
+                    <a href="tel:732-747-4551" class="btn btn-primary">Call to Purchase</a>
+                </div>
+            </div>
+
+            <p>Call us at <strong>732-747-4551</strong> to purchase gift cards or visit us in person at 141 W. Front Street, Red Bank, NJ.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>LOCATION</h4>
+                <p>141 W. Front Street<br>Red Bank, New Jersey<br>732-747-4551</p>
+            </div>
+
+            <div>
+                <h4>HOURS</h4>
+                <p><strong>Wednesday & Thursday:</strong> 4:30pm – 10:00pm<br>
+                <strong>Friday & Saturday:</strong> 4:30pm – 11:00pm<br>
+                <strong>Sunday:</strong> 4:30pm – 9:00pm</p>
+            </div>
+
+            <div>
+                <h4>CONTACT US</h4>
+                <p>732-747-4551<br>
+                General Inquiries Only:<br>
+                <a href="mailto:info@pazzoredbank.com">info@pazzoredbank.com</a><br>
+                Please Direct All Catering and Banquet Requests to:<br>
+                <a href="mailto:events@pazzoredbank.com">events@pazzoredbank.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="https://www.facebook.com/PazzoRedBank" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/pazzo_mmx/" target="_blank">Instagram</a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Pazzo MMX © <span id="year"></span> by Pazzo Red Bank</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

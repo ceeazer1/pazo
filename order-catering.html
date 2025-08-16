@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banquets & Catering — Pazzo MMX - Red Bank's premiere Italian Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #c41e3a;
+            --primary-light: #e8b4b8;
+            --dark-gray: #2a2a2a;
+            --light-gray: #f5f5f5;
+            --background-light: #fafafa;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --black: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        /* Header - EXACT La Mondina Style */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero {
+                height: 30vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+                gap: 20px;
+            }
+
+            .content-block {
+                padding: 2rem;
+            }
+
+            .main-content h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Buttons - EXACT La Mondina Style */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-dark {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .section-light {
+            background: var(--background-light);
+        }
+
+        /* Hero Section - EXACT La Mondina Layout */
+        .hero {
+            height: 40vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./images/homepage.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .grid-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 3vw;
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            grid-template-rows: repeat(6, minmax(calc(100vw * 0.0215), auto));
+            gap: 11px;
+            position: relative;
+        }
+
+        .content-block {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .main-content {
+            grid-area: 1/2/4/13;
+        }
+
+        .main-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #c41e3a;
+        }
+
+        .main-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .cta-section {
+            grid-area: 1/14/4/26;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #c41e3a;
+        }
+
+        .cta-button-large {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button-large:hover {
+            background: #a01729;
+            transform: translateY(-2px);
+        }
+
+        .info-block {
+            grid-area: 5/18/7/22;
+            background: #c41e3a;
+            color: white;
+            text-align: center;
+        }
+
+        .info-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-block p {
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer h4 {
+            font-family: 'Playfair Display', serif;
+            color: #c41e3a;
+            margin-bottom: 1rem;
+        }
+
+        .footer h5 {
+            color: #c41e3a;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        .footer a:hover {
+            color: #c41e3a;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(8, 1fr);
+                grid-template-rows: repeat(13, minmax(24px, auto));
+            }
+
+            .main-content {
+                grid-area: 1/2/6/10;
+            }
+
+            .cta-section {
+                grid-area: 6/2/11/10;
+            }
+
+            .info-block {
+                grid-area: 12/2/14/6;
+            }
+
+            .main-content h1 {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="/">
+                <img src="https://images.squarespace-cdn.com/content/v1/6127bdce985c3d7fa8244021/c3c1300a-5a8b-4065-acde-945586508937/Pazzo+Red+Black+Logo+%281%29.png" alt="Pazzo MMX Logo" class="logo">
+            </a>
+            <nav class="nav-menu">
+                <a href="/">HOME</a>
+                <a href="/menus">MENUS</a>
+                <a href="/order-catering" class="active">BANQUETS & CATERING</a>
+                <a href="/reach-out">RESERVATIONS</a>
+                <a href="https://www.toasttab.com/pazzo-mmx-141-w-front-st/v3" target="_blank">ORDER ONLINE</a>
+                <a href="/gift-cards">GIFT CARDS</a>
+                <a href="/join-our-team">CAREERS</a>
+                <a href="/reach-out">CONTACT</a>
+            </nav>
+
+            <div class="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>BANQUETS & CATERING</h1>
+            <p class="tagline">Perfect for your special events</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="section section-light">
+        <div class="grid-container">
+            <div class="content-block main-content">
+                <h1>Place Your Catering Order With us Today!</h1>
+                <p>Have a big upcoming event or party?! Click the button below to quickly order everything you might need and explore our extensive menu! We provide the food, you enjoy :)</p>
+            </div>
+
+            <div class="content-block cta-section">
+                <h2>Ready to Order?</h2>
+                <a href="https://www.toasttab.com/pazzo-mmx-141-w-front-st/v3/catering" target="_blank" class="cta-button-large">Place Your Catering Order!</a>
+            </div>
+
+            <div class="content-block info-block">
+                <h3>Call Us</h3>
+                <p>732-747-4551</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>Pazzo Red Bank</h4>
+                <p>141 W. Front Street,<br>Red Bank, New Jersey<br>732-747-4551</p>
+            </div>
+            
+            <div>
+                <h4>Hours</h4>
+                <h5>— Lunch Hours —</h5>
+                <p>Mon - Sat 11:30 AM - 3:00 PM</p>
+                <h5>— Dinner Hours —</h5>
+                <p>Mon - Thurs 3:00 PM - 9:00 PM<br>
+                   Fri - Sat 3:00 PM - 10:00 PM<br>
+                   Sunday - 12:00 - 9:00 PM</p>
+            </div>
+            
+            <div>
+                <h4>Follow</h4>
+                <a href="https://www.facebook.com/PazzoRedBank" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/pazzo_mmx/" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pazzo MMX - Red Bank's premiere Italian Restaurant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #c41e3a;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #c41e3a;
+        }
+
+        .cta {
+            background: #c41e3a;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .cta:hover {
+            background: #a01729;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        #hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #c41e3a;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #c41e3a;
+            border-color: #c41e3a;
+        }
+
+        /* Email Signup Section */
+        #email-signup {
+            background: #fff;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        #email-signup h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #c41e3a;
+        }
+
+        #email-signup p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .email-form {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .email-form input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .email-form button {
+            background: #c41e3a;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .email-form button:hover {
+            background: #a01729;
+        }
+
+        /* Quick Actions Section */
+        #quick-actions {
+            padding: 4rem 0;
+            background: #f8f8f8;
+        }
+
+        #quick-actions h3 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #c41e3a;
+        }
+
+        .card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #c41e3a;
+        }
+
+        .footer-section h5 {
+            color: #c41e3a;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .social a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social a:hover {
+            color: #c41e3a;
+        }
+
+        /* Food Gallery Section */
+        #food-gallery {
+            padding: 4rem 0;
+            background: #fff;
+        }
+
+        #food-gallery h3 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            #hero h2 {
+                font-size: 2rem;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .action-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Website content from https://www.pazzoredbank.com/ -->
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://images.squarespace-cdn.com/content/v1/6127bdce985c3d7fa8244021/c3c1300a-5a8b-4065-acde-945586508937/Pazzo+Red+Black+Logo+%281%29.png" alt="Pazzo MMX Logo">
+                    <span class="logo-text">Pazzo MMX</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#welcome">Welcome</a></li>
+                        <li><a href="#menus">Menus</a></li>
+                        <li><a href="#catering">Order Catering</a></li>
+                        <li><a href="#promotions">Promotions</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#careers">Join Our Team</a></li>
+                        <li><a href="#gift-cards">Gift Cards</a></li>
+                        <li><a href="#contact">Reach Out</a></li>
+                        <li><a href="#takeout" class="cta">Take Out Order</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Pazzo means crazy, and we're crazy about food!</h2>
+                <a href="#menu" class="btn">View Menu</a>
+            </div>
+        </section>
+
+        <section id="email-signup">
+            <div class="container">
+                <h3>Join our Emailing List!</h3>
+                <p>Sign up with your email address to receive new delicious specials and weekly deals and promotions!</p>
+                <form class="email-form">
+                    <input type="email" placeholder="Email Address" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="quick-actions">
+            <div class="container">
+                <h3>Place an online order, reserve a table, or view our menu below!</h3>
+
+                <div class="action-cards">
+                    <div class="card">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+                        <div class="card-content">
+                            <h4>Online Ordering</h4>
+                            <p>Click here to place an online order with us.</p>
+                            <a href="#" class="btn">Place an Order</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+                        <div class="card-content">
+                            <h4>Reserve a table</h4>
+                            <p>Click here to reserve a table with us!</p>
+                            <a href="#" class="btn">Make A Reservation</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+                        <div class="card-content">
+                            <h4>View Our Menu</h4>
+                            <p>Click here to view all of our menus including dinner, lunch, full wine list, and more!</p>
+                            <a href="#" class="btn">View Menus</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+                        <div class="card-content">
+                            <h4>Purchase Gift Cards Here!</h4>
+                            <p>Maximum of (2) gift cards per table reservation/seating. Click here to purchase Pazzo MMX gift cards!</p>
+                            <a href="#" class="btn">Purchase Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="food-gallery">
+            <div class="container">
+                <h3>Our Delicious Italian Cuisine</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1572441713132-51c75654db73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section contact-info">
+                <h4>Pazzo Red Bank</h4>
+                <p>141 W. Front Street,<br>Red Bank, New Jersey<br>732-747-4551</p>
+            </div>
+
+            <div class="footer-section hours">
+                <h4>Hours</h4>
+                <div class="lunch-hours">
+                    <h5>— Lunch Hours —</h5>
+                    <p>Mon - Sat 11:30 AM - 3:00 PM</p>
+                </div>
+                <div class="dinner-hours">
+                    <h5>— Dinner Hours —</h5>
+                    <p>Mon - Thurs 3:00 PM - 9:00 PM<br>
+                       Fri - Sat 3:00 PM - 10:00 PM<br>
+                       Sunday - 12:00 - 9:00 PM</p>
+                </div>
+            </div>
+
+            <div class="footer-section social">
+                <h4>Follow</h4>
+                <a href="https://www.facebook.com/PazzoRedBank">Facebook</a>
+                <a href="https://www.instagram.com/pazzo_mmx/">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
