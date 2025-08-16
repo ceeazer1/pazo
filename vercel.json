@@ -1,59 +1,32 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
+      "source": "/menus",
+      "destination": "/menus.html"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
+      "source": "/order-catering", 
+      "destination": "/order-catering.html"
     },
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|webp|svg|ico))",
-      "dest": "/$1"
+      "source": "/reach-out",
+      "destination": "/reach-out.html"
     },
     {
-      "src": "/",
-      "dest": "/server.js"
+      "source": "/join-our-team",
+      "destination": "/join-our-team.html"
     },
     {
-      "src": "/menus",
-      "dest": "/server.js"
+      "source": "/promotions",
+      "destination": "/promotions.html"
     },
     {
-      "src": "/order-catering",
-      "dest": "/server.js"
+      "source": "/gift-cards",
+      "destination": "/gift-cards.html"
     },
     {
-      "src": "/reach-out",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/join-our-team",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/promotions",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/gift-cards",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/about",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
+      "source": "/about",
+      "destination": "/about.html"
     }
   ]
 }
