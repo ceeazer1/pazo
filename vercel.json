@@ -8,6 +8,14 @@
   ],
   "routes": [
     {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
       "src": "/",
       "dest": "/server.js"
     },
@@ -43,5 +51,10 @@
       "src": "/(.*)",
       "dest": "/server.js"
     }
-  ]
+  ],
+  "functions": {
+    "server.js": {
+      "maxDuration": 10
+    }
+  }
 }
